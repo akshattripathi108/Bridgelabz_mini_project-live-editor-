@@ -1,0 +1,242 @@
+/* Editor Styles */
+:root {
+  --navbar-height: 60px;
+  --editor-header-height: 64px;
+}
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navbar-height));
+  background: #1e1e1e;
+  position: relative;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: #252526;
+  border-bottom: 1px solid #3e3e42;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.editor-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.editor-title h2 {
+  margin: 0;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+.room-id {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: #3e3e42;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  color: #b4b4b4;
+  font-size: 0.85rem;
+  font-family: 'Monaco', monospace;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+}
+
+.copy-btn:hover {
+  color: var(--primary-light);
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.language-selector label {
+  color: #b4b4b4;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.language-selector select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #3e3e42;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.language-selector select:hover {
+  border-color: var(--primary);
+}
+
+.language-selector select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.active-users-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: #b4b4b4;
+  font-size: 0.9rem;
+}
+
+.saving-indicator {
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: var(--radius-sm);
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-icon-text:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-icon-text:active {
+  transform: translateY(0);
+}
+
+/* Editor Wrapper */
+.editor-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.editor-wrapper > * {
+  width: 100%;
+  height: 100%;
+}
+
+/* When chat sidebar is open, make room for it so editor looks docked */
+.editor-container.chat-open .editor-wrapper {
+  margin-right: var(--chat-width, 400px);
+  transition: margin-right 0.25s ease;
+}
+
+/* Active Users Panel */
+.active-users-panel {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: #252526;
+  border: 1px solid #3e3e42;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  min-width: 200px;
+  max-width: 250px;
+  z-index: var(--z-sticky);
+  box-shadow: var(--shadow-lg);
+}
+
+.active-users-panel h4 {
+  color: #e0e0e0;
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: #b4b4b4;
+  font-size: 0.9rem;
+}
+
+.user-indicator {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Loading State */
+.editor-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1e1e1e;
+  color: #b4b4b4;
+  gap: var(--spacing-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .editor-toolbar {
+    width: 100%;
+  }
+
+  .language-selector {
+    width: 100%;
+  }
+
+  .language-selector select {
+    flex: 1;
+  }
+
+  .active-users-panel {
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    min-width: 150px;
+  }
+}
